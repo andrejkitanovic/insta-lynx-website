@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Truck, List, X } from "@phosphor-icons/react";
+import { List, X } from "@phosphor-icons/react";
 import { useState } from "react";
 
 const links = [
@@ -32,7 +33,13 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 text-lg font-semibold tracking-tight"
         >
-          <Truck size={22} weight="bold" />
+          <Image
+            src="/logo.png"
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain"
+          />
           NovaLinx
         </Link>
 

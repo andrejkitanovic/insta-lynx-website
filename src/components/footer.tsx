@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   XLogo,
   InstagramLogo,
   FacebookLogo,
-  Truck,
 } from "@phosphor-icons/react";
 
 export function Footer() {
@@ -20,7 +20,13 @@ export function Footer() {
               href="/"
               className="flex items-center gap-2 text-lg font-semibold tracking-tight"
             >
-              <Truck size={20} weight="bold" />
+              <Image
+                src="/logo.png"
+                alt=""
+                width={24}
+                height={24}
+                className="h-6 w-6 shrink-0 object-contain"
+              />
               NovaLinx
             </Link>
             <p className="mt-3 max-w-xs text-sm text-neutral-600">

@@ -25,8 +25,7 @@ export default function JobsPage() {
       !search ||
       job.title.toLowerCase().includes(search.toLowerCase()) ||
       job.company.toLowerCase().includes(search.toLowerCase());
-    const matchesRoute =
-      routeFilter === "All" || job.route === routeFilter;
+    const matchesRoute = routeFilter === "All" || job.route === routeFilter;
     return matchesSearch && matchesRoute;
   });
 
@@ -50,8 +49,8 @@ export default function JobsPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-4 max-w-xl text-base text-neutral-500">
-              Hundreds of verified positions from carriers you can trust.
-              Filter by route, pay, and home time.
+              Hundreds of verified positions from carriers you can trust. Filter
+              by route, pay, and home time.
             </p>
           </Reveal>
         </div>
@@ -84,7 +83,7 @@ export default function JobsPage() {
                     onClick={() => setRouteFilter(f)}
                     className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                       routeFilter === f
-                        ? "bg-white text-black"
+                        ? "bg-white text-black border border-white"
                         : "border border-white/8 text-neutral-500 hover:border-white/15 hover:text-white"
                     }`}
                   >
@@ -118,7 +117,9 @@ export default function JobsPage() {
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 text-sm text-neutral-500">{job.company}</p>
+                    <p className="mt-1 text-sm text-neutral-500">
+                      {job.company}
+                    </p>
 
                     <div className="mt-4 flex flex-wrap gap-3 text-xs text-neutral-500">
                       <span className="inline-flex items-center gap-1.5">

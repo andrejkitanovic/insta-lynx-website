@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "NovaLinx — Find Your Next Trucking Job",
   description:
     "Enter your ZIP code and discover CDL trucking jobs that match your home time, route type, and pay preferences.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
