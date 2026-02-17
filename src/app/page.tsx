@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   MagnifyingGlass,
@@ -31,6 +32,8 @@ import {
 import { AppStoreBadges } from "@/components/app-store-badges";
 
 export default function Home() {
+  const router = useRouter();
+  const [zip, setZip] = useState("");
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -82,11 +85,19 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <form className="mx-auto mt-10 flex max-w-md flex-col items-stretch gap-3 sm:flex-row">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                router.push(zip.trim() ? `/jobs?location=${encodeURIComponent(zip.trim())}` : "/jobs");
+              }}
+              className="mx-auto mt-10 flex max-w-md flex-col items-stretch gap-3 sm:flex-row"
+            >
               <input
                 type="text"
                 inputMode="numeric"
                 placeholder="Enter your ZIP code"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
                 className="flex-1 rounded-full border border-white/10 bg-white/4 px-5 py-3 text-sm text-white placeholder:text-neutral-600 outline-none transition-all duration-200 focus:border-white/25 focus:bg-white/6 focus:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
               />
               <button
