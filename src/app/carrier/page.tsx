@@ -12,14 +12,12 @@ import {
   Headset,
   UsersFour,
   BellRinging,
-  Star,
   Quotes,
   Plus,
   CaretRight,
   ChartLineUp,
   ShieldCheck,
   Crown,
-  MagnifyingGlass,
   Check,
 } from "@phosphor-icons/react";
 import {
@@ -77,7 +75,7 @@ export default function CarrierPage() {
               { icon: Users, title: "Qualified Drivers", desc: "Every driver on our platform has a verified CDL and is actively job-hunting." },
               { icon: Crosshair, title: "All-in on Trucking", desc: "We're not a general job board. Trucking is all we do — and we do it well." },
               { icon: Clock, title: "Improved Time-to-hire", desc: "Our matching fills seats 3x faster than traditional recruiting." },
-              { icon: CurrencyDollar, title: "No Upfront Costs", desc: "Start with our free plan. Only pay when you're ready to scale." },
+              { icon: CurrencyDollar, title: "Transparent Pricing", desc: "Plans from $99/mo. No hidden fees — scale when you're ready." },
             ].map((item) => (
               <motion.div key={item.title} variants={cardChild} whileHover={{ y: -4, transition: { duration: 0.2 } }} className="group rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-6 transition-colors duration-300 hover:border-white/15">
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-white/8 bg-white/4 text-neutral-400 transition-colors group-hover:text-white">
@@ -176,26 +174,27 @@ export default function CarrierPage() {
           <div className="absolute left-1/2 top-0 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/1.5 blur-3xl" />
         </div>
         <div className="mx-auto max-w-5xl px-6">
-          <SectionHeader label="Pricing" title="Choose Your Plan" description="Start free. Scale when you're ready." />
+          <SectionHeader label="Pricing" title="Choose Your Plan" description="Simple pricing that scales with your fleet." />
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2">
-            {/* Basic */}
+          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            {/* Starter */}
             <Reveal>
               <div className="rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-8">
-                <p className="text-xs font-medium uppercase tracking-wider text-neutral-600">Basic</p>
-                <p className="mt-3 text-3xl font-semibold">Free</p>
-                <p className="mt-1 text-sm text-neutral-500">Up to 5 applications / month</p>
+                <p className="text-xs font-medium uppercase tracking-wider text-neutral-600">Starter</p>
+                <p className="mt-3"><span className="text-3xl font-semibold">$99</span><span className="text-sm text-neutral-500">/month</span></p>
+                <p className="mt-1 text-sm text-neutral-500">For small carriers hiring occasionally</p>
                 <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
                   Get Started
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
-                  {["Post unlimited jobs", "Up to 5 applications/month", "Basic analytics", "Email support"].map((f) => (
+                  {["Unlimited job postings", "15 driver unlocks / month", "Access to CDL-verified drivers", "In-app messaging", "Basic driver filters", "Standard email support"].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
                       {f}
                     </li>
                   ))}
                 </ul>
+                <p className="mt-6 text-xs text-neutral-600">Best for 1–5 trucks</p>
               </div>
             </Reveal>
 
@@ -203,22 +202,44 @@ export default function CarrierPage() {
             <Reveal delay={0.1}>
               <div className="rounded-2xl border border-white/15 bg-linear-to-b from-white/6 to-white/2 p-8 shadow-[0_0_60px_rgba(255,255,255,0.03)]">
                 <div className="flex items-center gap-2">
-                  <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">NovaLinx Growth</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">Growth</p>
                   <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-black">Popular</span>
                 </div>
-                <p className="mt-3 text-3xl font-semibold">Custom</p>
-                <p className="mt-1 text-sm text-neutral-500">Tailored to your fleet size</p>
+                <p className="mt-3"><span className="text-3xl font-semibold">$249</span><span className="text-sm text-neutral-500">/month</span></p>
+                <p className="mt-1 text-sm text-neutral-500">For growing fleets hiring consistently</p>
                 <a href="#" className="mt-6 flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                  Book a Demo
+                  Get Started
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-400">
-                  {["Unlimited job postings", "Unlimited applications", "AI-powered CoPilot", "Priority search placement", "Dedicated success manager", "24/7 support"].map((f) => (
+                  {["Everything in Starter", "Unlimited driver unlocks", "Advanced recruiting filters", "Hiring activity dashboard", "Priority placement in search", "Faster support"].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-400" />
                       {f}
                     </li>
                   ))}
                 </ul>
+                <p className="mt-6 text-xs text-neutral-400">Best for 5–25 trucks</p>
+              </div>
+            </Reveal>
+
+            {/* Fleet */}
+            <Reveal delay={0.2}>
+              <div className="rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-8">
+                <p className="text-xs font-medium uppercase tracking-wider text-neutral-600">Fleet</p>
+                <p className="mt-3"><span className="text-3xl font-semibold">$499</span><span className="text-sm text-neutral-500">/month</span></p>
+                <p className="mt-1 text-sm text-neutral-500">For medium fleets scaling hiring operations</p>
+                <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
+                  Get Started
+                </a>
+                <ul className="mt-6 space-y-3 text-sm text-neutral-500">
+                  {["Everything in Growth", "Multi-user team accounts", "Advanced analytics (time-to-hire, trends)", "Premium visibility placement", "Dedicated support"].map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-xs text-neutral-600">Best for 25+ trucks</p>
               </div>
             </Reveal>
           </div>
@@ -232,8 +253,8 @@ export default function CarrierPage() {
           <Reveal delay={0.1}>
             <div className="mt-12 divide-y divide-white/8">
               {[
-                { q: "How does payment work?", a: "Our basic plan is free forever. For our Growth plan, we offer custom pricing based on your fleet size. You only pay for results." },
-                { q: "How do I get started?", a: "Create a free account, add your company info, and post your first job in under 5 minutes." },
+                { q: "How does payment work?", a: "We offer three plans starting at $99/month. All plans include unlimited job postings. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. You can upgrade or downgrade anytime." },
+                { q: "How do I get started?", a: "Sign up, choose a plan, add your company info, and post your first job in under 5 minutes." },
                 { q: "What about driver retention?", a: "Our matching focuses on fit — not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
                 { q: "Can I integrate with my ATS?", a: "Yes. We support integrations with major ATS platforms. Contact our team for setup help." },
               ].map((item) => (

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import {
   Envelope,
   Phone,
@@ -10,6 +11,7 @@ import {
   CaretRight,
 } from "@phosphor-icons/react";
 import { Reveal } from "@/components/animations";
+import { submitContactForm } from "@/lib/api";
 
 export default function ContactPage() {
   return (
@@ -139,70 +141,81 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <form className="mt-8 space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/25 focus:bg-white/6"
-                    placeholder="John"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/25 focus:bg-white/6"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/25 focus:bg-white/6"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  I am a...
-                </label>
-                <select className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-neutral-400 outline-none transition focus:border-white/25 focus:bg-white/6">
-                  <option>Driver</option>
-                  <option>Carrier</option>
-                  <option>Investor</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/25 focus:bg-white/6"
-                  placeholder="Tell us how we can help..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
-              >
-                Send Message
-              </button>
-            </form>
+            <ContactForm />
           </Reveal>
         </div>
       </section>
     </>
+  );
+}
+
+function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const inputCls = "w-full rounded-xl border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/25 focus:bg-white/6";
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const fd = new FormData(e.currentTarget);
+    try {
+      await submitContactForm({
+        firstName: fd.get("firstName") as string,
+        lastName: fd.get("lastName") as string,
+        email: fd.get("email") as string,
+        role: fd.get("role") as string,
+        message: fd.get("message") as string,
+      });
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="mt-8 rounded-2xl border border-white/10 bg-white/4 p-8 text-center">
+        <p className="text-lg font-medium">Message sent!</p>
+        <p className="mt-2 text-sm text-neutral-500">We&apos;ll get back to you within 24 hours.</p>
+        <button onClick={() => setStatus("idle")} className="mt-4 text-sm text-neutral-400 underline hover:text-white">Send another message</button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">First Name</label>
+          <input name="firstName" type="text" required className={inputCls} placeholder="John" />
+        </div>
+        <div>
+          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">Last Name</label>
+          <input name="lastName" type="text" required className={inputCls} placeholder="Doe" />
+        </div>
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">Email</label>
+        <input name="email" type="email" required className={inputCls} placeholder="john@example.com" />
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">I am a...</label>
+        <select name="role" className={inputCls + " text-neutral-400"}>
+          <option>Driver</option>
+          <option>Carrier</option>
+          <option>Investor</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-neutral-600">Message</label>
+        <textarea name="message" rows={4} required className={inputCls} placeholder="Tell us how we can help..." />
+      </div>
+      {status === "error" && <p className="text-sm text-red-400">Something went wrong. Please try again.</p>}
+      <button type="submit" disabled={status === "loading"} className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] disabled:opacity-50">
+        {status === "loading" ? "Sending..." : "Send Message"}
+      </button>
+    </form>
   );
 }
