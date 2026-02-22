@@ -209,7 +209,7 @@ export default function Home() {
               {
                 icon: CursorClick,
                 title: "One-Tap Apply",
-                desc: "Apply from the app or website in seconds with your saved profile.",
+                desc: "Apply from the mobile app in seconds with your saved profile.",
               },
               {
                 icon: ChartBar,
@@ -256,7 +256,7 @@ export default function Home() {
             <Reveal delay={0.15}>
               <ul className="mt-8 space-y-4 text-[15px] text-neutral-400">
                 {[
-                  "Apply directly through the app or browse our website.",
+                  "Browse jobs on the website, apply through the mobile app.",
                   "Personalized job recommendations based on your profile.",
                   "Real-time notifications when new jobs match your preferences.",
                   "Detailed carrier information before you ever hit apply.",

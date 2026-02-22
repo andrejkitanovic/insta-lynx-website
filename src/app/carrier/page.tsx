@@ -174,7 +174,7 @@ export default function CarrierPage() {
           <div className="absolute left-1/2 top-0 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/1.5 blur-3xl" />
         </div>
         <div className="mx-auto max-w-5xl px-6">
-          <SectionHeader label="Pricing" title="Choose Your Plan" description="Simple pricing that scales with your fleet." />
+          <SectionHeader label="Pricing" title="Choose Your Plan" description="First month free on every plan. Simple pricing that scales with your fleet." />
 
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {/* Starter */}
@@ -182,9 +182,10 @@ export default function CarrierPage() {
               <div className="rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-8">
                 <p className="text-xs font-medium uppercase tracking-wider text-neutral-600">Starter</p>
                 <p className="mt-3"><span className="text-3xl font-semibold">$99</span><span className="text-sm text-neutral-500">/month</span></p>
-                <p className="mt-1 text-sm text-neutral-500">For small carriers hiring occasionally</p>
+                <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
+                <p className="mt-0.5 text-sm text-neutral-500">For small carriers hiring occasionally</p>
                 <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
-                  Get Started
+                  Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
                   {["Unlimited job postings", "15 driver unlocks / month", "Access to CDL-verified drivers", "In-app messaging", "Basic driver filters", "Standard email support"].map((f) => (
@@ -206,9 +207,10 @@ export default function CarrierPage() {
                   <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-black">Popular</span>
                 </div>
                 <p className="mt-3"><span className="text-3xl font-semibold">$249</span><span className="text-sm text-neutral-500">/month</span></p>
-                <p className="mt-1 text-sm text-neutral-500">For growing fleets hiring consistently</p>
+                <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
+                <p className="mt-0.5 text-sm text-neutral-500">For growing fleets hiring consistently</p>
                 <a href="#" className="mt-6 flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                  Get Started
+                  Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-400">
                   {["Everything in Starter", "Unlimited driver unlocks", "Advanced recruiting filters", "Hiring activity dashboard", "Priority placement in search", "Faster support"].map((f) => (
@@ -227,9 +229,10 @@ export default function CarrierPage() {
               <div className="rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-8">
                 <p className="text-xs font-medium uppercase tracking-wider text-neutral-600">Fleet</p>
                 <p className="mt-3"><span className="text-3xl font-semibold">$499</span><span className="text-sm text-neutral-500">/month</span></p>
-                <p className="mt-1 text-sm text-neutral-500">For medium fleets scaling hiring operations</p>
+                <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
+                <p className="mt-0.5 text-sm text-neutral-500">For medium fleets scaling hiring operations</p>
                 <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
-                  Get Started
+                  Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
                   {["Everything in Growth", "Multi-user team accounts", "Advanced analytics (time-to-hire, trends)", "Premium visibility placement", "Dedicated support"].map((f) => (
@@ -253,8 +256,8 @@ export default function CarrierPage() {
           <Reveal delay={0.1}>
             <div className="mt-12 divide-y divide-white/8">
               {[
-                { q: "How does payment work?", a: "We offer three plans starting at $99/month. All plans include unlimited job postings. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. You can upgrade or downgrade anytime." },
-                { q: "How do I get started?", a: "Sign up, choose a plan, add your company info, and post your first job in under 5 minutes." },
+                { q: "How does payment work?", a: "Every plan starts with a free first month — no credit card charged until month two. After that, plans start at $99/month. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. Upgrade or downgrade anytime." },
+                { q: "How do I get started?", a: "Sign up, start your free trial, add your company info, and post your first job in under 5 minutes." },
                 { q: "What about driver retention?", a: "Our matching focuses on fit — not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
                 { q: "Can I integrate with my ATS?", a: "Yes. We support integrations with major ATS platforms. Contact our team for setup help." },
               ].map((item) => (

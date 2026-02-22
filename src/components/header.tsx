@@ -64,7 +64,7 @@ export function Header() {
             href="https://app.novalinx.io"
             className="hidden text-[15px] text-neutral-500 transition-colors duration-200 hover:text-white sm:inline-block"
           >
-            Login
+            Carrier Login
           </a>
           <Link
             href="/jobs"
@@ -109,7 +109,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="mt-2 rounded-lg px-3 py-2.5 text-[15px] text-neutral-500 transition-colors hover:bg-white/5"
             >
-              Login
+              Carrier Login
             </a>
           </nav>
         </motion.div>

@@ -532,10 +532,10 @@ function JobShowcase({
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="https://app.novalinx.io"
+            href="/download"
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-white py-2.5 text-sm font-medium text-black transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
           >
-            Log in to apply
+            Apply via App
           </a>
           <button className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-neutral-500 transition hover:border-white/20 hover:text-white">
             <ShareNetwork size={15} weight="bold" />
