@@ -151,6 +151,8 @@ export interface ApiJob {
   job_type?: string; // legacy
   cdl_class?: string;
   experience_required?: string;
+  driver_type?: string;
+  sap_policy?: string;
   haul_type?: string;
   load_type?: string;
   freight_handling?: string;

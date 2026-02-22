@@ -29,7 +29,398 @@ import {
 import { Reveal, StaggerContainer, cardChild } from "@/components/animations";
 import { getJobs, formatSalary, type ApiJob } from "@/lib/api";
 
-const ROUTE_FILTERS = ["All", "OTR", "Regional", "Local", "Dedicated"];
+/* ─── Filter option constants ─── */
+const CDL_CLASSES = ["A", "B"] as const;
+const EMPLOYMENT_TYPES = [
+  { key: "company_driver", label: "Company Driver", match: "W2 Employee" },
+  { key: "owner_operator", label: "Owner Operator", match: "Owner Operator (O/O)" },
+  { key: "lease_purchase", label: "Lease to Purchase", match: "Lease Purchase" },
+] as const;
+const DRIVER_TYPES = ["Solo", "Team"] as const;
+const ROUTE_TYPES = ["OTR", "Regional", "Semi-Local", "Local"] as const;
+const HAUL_TYPES = ["Dry Van", "Flatbed", "Refrigerated", "Tanker", "Box Truck", "Power Only", "Hazmat tanker", "Straight Tanker"] as const;
+const SAP_OPTIONS = ["No SAP", "SAP Friendly", "SAP Completed Only"] as const;
+const FREIGHT_OPTIONS = ["No-Touch", "Touch Freight", "Live Load/Unload", "Drop & Hook"] as const;
+
+interface JobFilters {
+  cdlClass: string;
+  employmentTypes: string[];
+  driverType: string;
+  routeTypes: string[];
+  haulTypes: string[];
+  sapPolicy: string;
+  freightHandling: string[];
+  petsOnly: boolean;
+  ridersOnly: boolean;
+  minPay: number;
+  maxDaysOut: number;
+}
+
+const EMPTY_FILTERS: JobFilters = {
+  cdlClass: "",
+  employmentTypes: [],
+  driverType: "",
+  routeTypes: [],
+  haulTypes: [],
+  sapPolicy: "",
+  freightHandling: [],
+  petsOnly: false,
+  ridersOnly: false,
+  minPay: 0,
+  maxDaysOut: 0,
+};
+
+function countActiveFilters(f: JobFilters): number {
+  let count = 0;
+  if (f.cdlClass) count++;
+  count += f.employmentTypes.length;
+  if (f.driverType) count++;
+  count += f.routeTypes.length;
+  count += f.haulTypes.length;
+  if (f.sapPolicy) count++;
+  count += f.freightHandling.length;
+  if (f.petsOnly) count++;
+  if (f.ridersOnly) count++;
+  if (f.minPay > 0) count++;
+  if (f.maxDaysOut > 0) count++;
+  return count;
+}
+
+/* ─── Toggle helpers ─── */
+function toggleInArray(arr: string[], val: string): string[] {
+  return arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
+}
+
+/* ─── Filter Modal ─── */
+function FilterModal({
+  open,
+  onClose,
+  filters,
+  onApply,
+  jobCount,
+}: {
+  open: boolean;
+  onClose: () => void;
+  filters: JobFilters;
+  onApply: (f: JobFilters) => void;
+  jobCount: number;
+}) {
+  const [draft, setDraft] = useState<JobFilters>(filters);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const prevOpen = useRef(open);
+
+  // eslint-disable-next-line react-hooks/refs
+  if (open && !prevOpen.current) {
+    setDraft(filters);
+  }
+  // eslint-disable-next-line react-hooks/refs
+  prevOpen.current = open;
+
+  const toggleAccordion = (key: string) =>
+    setExpandedSection((prev) => (prev === key ? null : key));
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+
+      {/* Dialog */}
+      <div className="relative z-10 mx-4 grid w-full max-w-[500px] max-h-[80dvh] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]">
+        {/* Header */}
+        <div className="p-6 pb-0">
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="text-2xl font-bold">Filter jobs</h2>
+              <p className="mt-1 text-sm text-neutral-500 hidden lg:block">
+                Refine your search by job type, pay, home time, trailer type and more.
+              </p>
+            </div>
+            <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 text-neutral-500 transition hover:text-white">
+              <X size={14} weight="bold" />
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable body */}
+        <div className="overflow-y-auto overscroll-contain p-6 space-y-5">
+          {/* CDL Class */}
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wider text-neutral-500 mb-3">CDL Class</p>
+            <div className="grid grid-cols-2 gap-3">
+              {CDL_CLASSES.map((cls) => (
+                <button
+                  key={cls}
+                  onClick={() => setDraft((d) => ({ ...d, cdlClass: d.cdlClass === cls ? "" : cls }))}
+                  className={`rounded-lg border py-2.5 text-sm font-medium transition ${
+                    draft.cdlClass === cls
+                      ? "border-white bg-white text-black"
+                      : "border-white/10 text-neutral-400 hover:border-white/20"
+                  }`}
+                >
+                  Class {cls}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Employment Type */}
+          <div className="space-y-2.5">
+            {EMPLOYMENT_TYPES.map((et) => (
+              <label key={et.key} className="flex items-center justify-between cursor-pointer">
+                <span className="text-sm font-medium">{et.label}</span>
+                <button
+                  onClick={() => setDraft((d) => ({ ...d, employmentTypes: toggleInArray(d.employmentTypes, et.match) }))}
+                  className={`h-5 w-9 rounded-full border transition-colors ${
+                    draft.employmentTypes.includes(et.match)
+                      ? "bg-white border-white"
+                      : "bg-white/10 border-white/10"
+                  }`}
+                >
+                  <span
+                    className={`block h-4 w-4 rounded-full transition-transform ${
+                      draft.employmentTypes.includes(et.match)
+                        ? "translate-x-4 bg-black"
+                        : "translate-x-0.5 bg-neutral-500"
+                    }`}
+                  />
+                </button>
+              </label>
+            ))}
+          </div>
+
+          {/* Driver Type */}
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wider text-neutral-500 mb-3">Driver Type</p>
+            <div className="grid grid-cols-2 gap-3">
+              {DRIVER_TYPES.map((dt) => (
+                <button
+                  key={dt}
+                  onClick={() => setDraft((d) => ({ ...d, driverType: d.driverType === dt ? "" : dt }))}
+                  className={`rounded-lg border py-2.5 text-sm font-medium transition ${
+                    draft.driverType === dt
+                      ? "border-white bg-white text-black"
+                      : "border-white/10 text-neutral-400 hover:border-white/20"
+                  }`}
+                >
+                  {dt}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Route Type (checkboxes) */}
+          <div className="space-y-2.5">
+            <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">Route Type</p>
+            {ROUTE_TYPES.map((rt) => (
+              <label key={rt} className="flex items-center gap-3 cursor-pointer">
+                <span
+                  className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition ${
+                    draft.routeTypes.includes(rt)
+                      ? "border-white bg-white"
+                      : "border-white/20 bg-transparent"
+                  }`}
+                >
+                  {draft.routeTypes.includes(rt) && <Check size={10} weight="bold" className="text-black" />}
+                </span>
+                <span className="text-sm">{rt}</span>
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  checked={draft.routeTypes.includes(rt)}
+                  onChange={() => setDraft((d) => ({ ...d, routeTypes: toggleInArray(d.routeTypes, rt) }))}
+                />
+              </label>
+            ))}
+          </div>
+
+          {/* ─── Accordion sections ─── */}
+
+          {/* Haul Type */}
+          <AccordionSection title="Haul Type" expanded={expandedSection === "haul"} onToggle={() => toggleAccordion("haul")}>
+            <div className="flex flex-wrap gap-2">
+              {HAUL_TYPES.map((ht) => (
+                <button
+                  key={ht}
+                  onClick={() => setDraft((d) => ({ ...d, haulTypes: toggleInArray(d.haulTypes, ht) }))}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                    draft.haulTypes.includes(ht)
+                      ? "border-white bg-white text-black"
+                      : "border-white/10 text-neutral-400 hover:border-white/20"
+                  }`}
+                >
+                  {ht}
+                </button>
+              ))}
+            </div>
+          </AccordionSection>
+
+          {/* SAP Policy */}
+          <AccordionSection title="SAP Policy" expanded={expandedSection === "sap"} onToggle={() => toggleAccordion("sap")}>
+            <div className="space-y-2.5">
+              {SAP_OPTIONS.map((sap) => (
+                <label key={sap} className="flex items-center gap-3 cursor-pointer">
+                  <span
+                    className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition ${
+                      draft.sapPolicy === sap
+                        ? "border-white bg-white"
+                        : "border-white/20 bg-transparent"
+                    }`}
+                  >
+                    {draft.sapPolicy === sap && <span className="block h-2 w-2 rounded-full bg-black" />}
+                  </span>
+                  <span className="text-sm">{sap}</span>
+                  <input
+                    type="radio"
+                    name="sap"
+                    className="sr-only"
+                    checked={draft.sapPolicy === sap}
+                    onChange={() => setDraft((d) => ({ ...d, sapPolicy: d.sapPolicy === sap ? "" : sap }))}
+                  />
+                </label>
+              ))}
+            </div>
+          </AccordionSection>
+
+          {/* Pay & Home Time */}
+          <AccordionSection title="Pay & Home Time" expanded={expandedSection === "pay"} onToggle={() => toggleAccordion("pay")}>
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-neutral-500">Minimum weekly pay ($)</label>
+                <input
+                  type="number"
+                  value={draft.minPay || ""}
+                  onChange={(e) => setDraft((d) => ({ ...d, minPay: Number(e.target.value) || 0 }))}
+                  placeholder="e.g. 1500"
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/4 px-3 py-2 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/20"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-neutral-500">Max days out</label>
+                <input
+                  type="number"
+                  value={draft.maxDaysOut || ""}
+                  onChange={(e) => setDraft((d) => ({ ...d, maxDaysOut: Number(e.target.value) || 0 }))}
+                  placeholder="e.g. 14"
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/4 px-3 py-2 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/20"
+                />
+              </div>
+            </div>
+          </AccordionSection>
+
+          {/* Freight Handling */}
+          <AccordionSection title="Freight Handling" expanded={expandedSection === "freight"} onToggle={() => toggleAccordion("freight")}>
+            <div className="flex flex-wrap gap-2">
+              {FREIGHT_OPTIONS.map((fo) => (
+                <button
+                  key={fo}
+                  onClick={() => setDraft((d) => ({ ...d, freightHandling: toggleInArray(d.freightHandling, fo) }))}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                    draft.freightHandling.includes(fo)
+                      ? "border-white bg-white text-black"
+                      : "border-white/10 text-neutral-400 hover:border-white/20"
+                  }`}
+                >
+                  {fo}
+                </button>
+              ))}
+            </div>
+          </AccordionSection>
+
+          {/* Pets & Riders */}
+          <AccordionSection title="Pets & Riders" expanded={expandedSection === "pets"} onToggle={() => toggleAccordion("pets")}>
+            <div className="space-y-3">
+              <label className="flex items-center justify-between cursor-pointer">
+                <span className="text-sm font-medium">Only jobs allowing pets</span>
+                <button
+                  onClick={() => setDraft((d) => ({ ...d, petsOnly: !d.petsOnly }))}
+                  className={`h-5 w-9 rounded-full border transition-colors ${
+                    draft.petsOnly ? "bg-white border-white" : "bg-white/10 border-white/10"
+                  }`}
+                >
+                  <span className={`block h-4 w-4 rounded-full transition-transform ${draft.petsOnly ? "translate-x-4 bg-black" : "translate-x-0.5 bg-neutral-500"}`} />
+                </button>
+              </label>
+              <label className="flex items-center justify-between cursor-pointer">
+                <span className="text-sm font-medium">Only jobs allowing riders</span>
+                <button
+                  onClick={() => setDraft((d) => ({ ...d, ridersOnly: !d.ridersOnly }))}
+                  className={`h-5 w-9 rounded-full border transition-colors ${
+                    draft.ridersOnly ? "bg-white border-white" : "bg-white/10 border-white/10"
+                  }`}
+                >
+                  <span className={`block h-4 w-4 rounded-full transition-transform ${draft.ridersOnly ? "translate-x-4 bg-black" : "translate-x-0.5 bg-neutral-500"}`} />
+                </button>
+              </label>
+            </div>
+          </AccordionSection>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between border-t border-white/8 p-4">
+          <button
+            onClick={() => setDraft(EMPTY_FILTERS)}
+            className="text-sm text-neutral-500 transition hover:text-white"
+          >
+            Clear all
+          </button>
+          <button
+            onClick={() => {
+              onApply(draft);
+              onClose();
+            }}
+            className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+          >
+            Show {jobCount} jobs
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Accordion Section ─── */
+function AccordionSection({
+  title,
+  expanded,
+  onToggle,
+  children,
+}: {
+  title: string;
+  expanded: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="border-t border-white/6 pt-3">
+      <button onClick={onToggle} className="flex w-full items-center justify-between py-1 text-left">
+        <span className="text-sm font-medium">{title}</span>
+        <svg
+          className={`h-4 w-4 text-neutral-500 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {expanded && <div className="pt-3 pb-1">{children}</div>}
+    </div>
+  );
+}
+
+/* ─── Filter Badge ─── */
+function FilterBadge({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs font-medium text-neutral-300">
+      {label}
+      <button onClick={onRemove} className="text-neutral-500 transition hover:text-white">
+        <X size={10} weight="bold" />
+      </button>
+    </span>
+  );
+}
 
 function buildPayLine(job: ApiJob): string {
   const parts: string[] = [];
@@ -476,12 +867,14 @@ function JobsPageContent() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState(searchParams.get("location") || "");
-  const [routeFilter, setRouteFilter] = useState("All");
+  const [filters, setFilters] = useState<JobFilters>(EMPTY_FILTERS);
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const [jobs, setJobs] = useState<ApiJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState<ApiJob | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
+  const activeFilterCount = countActiveFilters(filters);
 
   useEffect(() => {
     async function fetchJobs() {
@@ -517,28 +910,78 @@ function JobsPageContent() {
 
   const filtered = useMemo(() => {
     return jobs.filter((job) => {
-      const matchesSearch =
-        !search ||
-        job.title.toLowerCase().includes(search.toLowerCase()) ||
-        (job.carrier?.name || "").toLowerCase().includes(search.toLowerCase());
+      // Text search
+      if (search) {
+        const q = search.toLowerCase();
+        const searchable = [job.title, job.carrier?.name].filter(Boolean).join(" ").toLowerCase();
+        if (!searchable.includes(q)) return false;
+      }
 
-      const matchesLocation =
-        !location ||
-        (job.city || "").toLowerCase().includes(location.toLowerCase()) ||
-        (job.state || "").toLowerCase().includes(location.toLowerCase()) ||
-        (job.locations || []).some(
-          (l) =>
-            (l.city || "").toLowerCase().includes(location.toLowerCase()) ||
-            (l.state || "").toLowerCase().includes(location.toLowerCase())
-        );
+      // Location
+      if (location) {
+        const loc = location.toLowerCase();
+        const matchLoc =
+          (job.city || "").toLowerCase().includes(loc) ||
+          (job.state || "").toLowerCase().includes(loc) ||
+          (job.locations || []).some(
+            (l) =>
+              (l.city || "").toLowerCase().includes(loc) ||
+              (l.state || "").toLowerCase().includes(loc)
+          );
+        if (!matchLoc) return false;
+      }
 
-      const matchesRoute =
-        routeFilter === "All" ||
-        (job.route_type || job.job_type || "").toLowerCase() === routeFilter.toLowerCase();
+      // CDL Class
+      if (filters.cdlClass && job.cdl_class !== filters.cdlClass) return false;
 
-      return matchesSearch && matchesLocation && matchesRoute;
+      // Employment Types
+      if (filters.employmentTypes.length > 0 && !filters.employmentTypes.includes(job.employment_type || "")) return false;
+
+      // Driver Type
+      if (filters.driverType && (job.driver_type || "").toLowerCase() !== filters.driverType.toLowerCase()) return false;
+
+      // Route Types
+      if (filters.routeTypes.length > 0) {
+        const rt = (job.route_type || job.job_type || "").toLowerCase();
+        if (!filters.routeTypes.some((f) => f.toLowerCase() === rt)) return false;
+      }
+
+      // Haul Types
+      if (filters.haulTypes.length > 0) {
+        const ht = (job.haul_type || "").toLowerCase();
+        if (!filters.haulTypes.some((f) => f.toLowerCase() === ht)) return false;
+      }
+
+      // SAP Policy
+      if (filters.sapPolicy && (job.sap_policy || "") !== filters.sapPolicy) return false;
+
+      // Freight Handling
+      if (filters.freightHandling.length > 0) {
+        const fh = (job.load_type || job.freight_handling || "").toLowerCase();
+        if (!filters.freightHandling.some((f) => f.toLowerCase() === fh)) return false;
+      }
+
+      // Pets
+      if (filters.petsOnly) {
+        const pp = (job.pet_policy || "").toLowerCase();
+        if (!pp || pp.includes("no pet")) return false;
+      }
+
+      // Riders
+      if (filters.ridersOnly) {
+        const rp = (job.rider_policy || "").toLowerCase();
+        if (!rp || rp.includes("no rider")) return false;
+      }
+
+      // Min Pay
+      if (filters.minPay > 0 && job.salary.to < filters.minPay) return false;
+
+      // Max Days Out
+      if (filters.maxDaysOut > 0 && job.home_time?.days_out_max && job.home_time.days_out_max > filters.maxDaysOut) return false;
+
+      return true;
     });
-  }, [jobs, search, location, routeFilter]);
+  }, [jobs, search, location, filters]);
 
   // Auto-select first job when filtered list changes
   useEffect(() => {
@@ -612,25 +1055,70 @@ function JobsPageContent() {
                 />
               </div>
 
-              {/* Route pills */}
-              <div className="flex items-center gap-2 overflow-x-auto">
-                <Funnel size={16} className="shrink-0 text-neutral-600" />
-                {ROUTE_FILTERS.map((f) => (
-                  <button
-                    key={f}
-                    onClick={() => setRouteFilter(f)}
-                    className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
-                      routeFilter === f
-                        ? "bg-white text-black border border-white"
-                        : "border border-white/8 text-neutral-500 hover:border-white/15 hover:text-white"
-                    }`}
-                  >
-                    {f}
-                  </button>
-                ))}
-              </div>
+              {/* Filter button */}
+              <button
+                onClick={() => setShowFilterModal(true)}
+                className={`shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
+                  activeFilterCount > 0
+                    ? "bg-white text-black border border-white"
+                    : "border border-white/8 text-neutral-400 hover:border-white/15 hover:text-white"
+                }`}
+              >
+                <Funnel size={15} weight="bold" />
+                Filter Jobs
+                {activeFilterCount > 0 && (
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] font-bold text-white">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
             </div>
           </Reveal>
+
+          {/* Active filter badges */}
+          {activeFilterCount > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {filters.cdlClass && (
+                <FilterBadge label={`CDL-${filters.cdlClass}`} onRemove={() => setFilters((f) => ({ ...f, cdlClass: "" }))} />
+              )}
+              {filters.employmentTypes.map((et) => (
+                <FilterBadge key={et} label={et} onRemove={() => setFilters((f) => ({ ...f, employmentTypes: f.employmentTypes.filter((v) => v !== et) }))} />
+              ))}
+              {filters.driverType && (
+                <FilterBadge label={filters.driverType} onRemove={() => setFilters((f) => ({ ...f, driverType: "" }))} />
+              )}
+              {filters.routeTypes.map((rt) => (
+                <FilterBadge key={rt} label={rt} onRemove={() => setFilters((f) => ({ ...f, routeTypes: f.routeTypes.filter((v) => v !== rt) }))} />
+              ))}
+              {filters.haulTypes.map((ht) => (
+                <FilterBadge key={ht} label={ht} onRemove={() => setFilters((f) => ({ ...f, haulTypes: f.haulTypes.filter((v) => v !== ht) }))} />
+              ))}
+              {filters.sapPolicy && (
+                <FilterBadge label={filters.sapPolicy} onRemove={() => setFilters((f) => ({ ...f, sapPolicy: "" }))} />
+              )}
+              {filters.freightHandling.map((fh) => (
+                <FilterBadge key={fh} label={fh} onRemove={() => setFilters((f) => ({ ...f, freightHandling: f.freightHandling.filter((v) => v !== fh) }))} />
+              ))}
+              {filters.petsOnly && (
+                <FilterBadge label="Pets allowed" onRemove={() => setFilters((f) => ({ ...f, petsOnly: false }))} />
+              )}
+              {filters.ridersOnly && (
+                <FilterBadge label="Riders allowed" onRemove={() => setFilters((f) => ({ ...f, ridersOnly: false }))} />
+              )}
+              {filters.minPay > 0 && (
+                <FilterBadge label={`Min $${filters.minPay}/wk`} onRemove={() => setFilters((f) => ({ ...f, minPay: 0 }))} />
+              )}
+              {filters.maxDaysOut > 0 && (
+                <FilterBadge label={`Max ${filters.maxDaysOut}d out`} onRemove={() => setFilters((f) => ({ ...f, maxDaysOut: 0 }))} />
+              )}
+              <button
+                onClick={() => setFilters(EMPTY_FILTERS)}
+                className="text-xs font-medium text-red-400 transition hover:text-red-300"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
 
           {loading ? (
             <div className="mt-16 flex items-center justify-center">
@@ -696,6 +1184,15 @@ function JobsPageContent() {
           )}
         </div>
       </section>
+
+      {/* Filter Modal */}
+      <FilterModal
+        open={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        filters={filters}
+        onApply={setFilters}
+        jobCount={filtered.length}
+      />
     </>
   );
 }
