@@ -9,9 +9,10 @@ import { useState } from "react";
 
 const links = [
   { href: "/jobs", label: "Jobs" },
+  { href: "/companies", label: "Companies" },
+  { href: "/insights", label: "CDL Insights" },
   { href: "/download", label: "For Drivers" },
   { href: "/carrier", label: "For Carriers" },
-  { href: "/investors", label: "Investors" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];

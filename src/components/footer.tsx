@@ -35,13 +35,15 @@ export function Footer() {
             </p>
             <div className="mt-5 flex items-center gap-3">
               {[
-                { icon: XLogo, label: "X" },
-                { icon: InstagramLogo, label: "Instagram" },
-                { icon: FacebookLogo, label: "Facebook" },
-              ].map(({ icon: Icon, label }) => (
+                { icon: XLogo, label: "X", href: "#" },
+                { icon: InstagramLogo, label: "Instagram", href: "#" },
+                { icon: FacebookLogo, label: "Facebook", href: "#" },
+              ].map(({ icon: Icon, label, href }) => (
                 <motion.a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/3 text-neutral-600 transition-colors duration-200 hover:border-white/20 hover:text-white"
@@ -97,14 +99,19 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="transition hover:text-white">
+                <Link href="/privacy-policy" className="transition hover:text-white">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="transition hover:text-white">
+                <Link href="/terms-and-conditions" className="transition hover:text-white">
                   Terms of Service
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookie-policy" className="transition hover:text-white">
+                  Cookie Policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -131,15 +138,15 @@ export function Footer() {
             &copy; {new Date().getFullYear()} NovaLinx. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="transition-colors duration-200 hover:text-white">
+            <Link href="/privacy-policy" className="transition-colors duration-200 hover:text-white">
               Privacy
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-white">
+            </Link>
+            <Link href="/terms-and-conditions" className="transition-colors duration-200 hover:text-white">
               Terms
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-white">
+            </Link>
+            <Link href="/contact" className="transition-colors duration-200 hover:text-white">
               Support
-            </a>
+            </Link>
           </div>
         </div>
       </div>

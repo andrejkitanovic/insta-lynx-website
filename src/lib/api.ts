@@ -206,6 +206,17 @@ export async function getJob(id: string): Promise<ApiJob> {
   return apiFetch<ApiJob>(`/api/public/jobs/${id}`);
 }
 
+export async function getCarriers(params?: {
+  filter?: string;
+  limit?: number;
+  page?: number;
+  sort?: string;
+}): Promise<FilterResponse<Carrier>> {
+  return apiFetch<FilterResponse<Carrier>>('/api/public/carriers', {
+    params: params as Record<string, string | number | undefined>,
+  });
+}
+
 export async function getCarrier(id: string): Promise<Carrier> {
   return apiFetch<Carrier>(`/api/public/carriers/${id}`);
 }
@@ -232,6 +243,42 @@ export async function submitContactForm(data: {
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+// ─── Insights Types ───
+
+export interface InsightsSummary {
+  totalJobs: number;
+  avgWeeklyPay: number;
+  medianPay: number;
+  p90Pay: number;
+  avgSignOnBonus: number;
+  jobsWithSignOnBonus: number;
+  jobsWithPets: number;
+  jobsWithRiders: number;
+}
+
+export interface InsightsByType {
+  type: string;
+  count: number;
+  avgPay: number;
+}
+
+export interface InsightsByState {
+  state: string;
+  count: number;
+  avgPay: number;
+}
+
+export interface InsightsResponse {
+  summary: InsightsSummary;
+  byEmploymentType: InsightsByType[];
+  byRouteType: InsightsByType[];
+  byState: InsightsByState[];
+}
+
+export async function getInsights(): Promise<InsightsResponse> {
+  return apiFetch<InsightsResponse>('/api/public/insights');
 }
 
 // ─── Helpers ───

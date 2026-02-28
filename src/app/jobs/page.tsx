@@ -728,8 +728,8 @@ function JobCardContent({
                 {(job.carrier.fleet.trucks || 0) + (job.carrier.fleet.tractors || 0)} Truck Operation
               </span>
             )}
-            {job.status === "Ongoing" && (
-              <span className="rounded-full bg-white/8 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider text-neutral-400">
+            {job.carrier?.responsive_employer && (
+              <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider text-emerald-400">
                 Actively Hiring
               </span>
             )}
@@ -869,6 +869,7 @@ function JobsPageContent() {
   const [location, setLocation] = useState(searchParams.get("location") || "");
   const [filters, setFilters] = useState<JobFilters>(EMPTY_FILTERS);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [sortBy, setSortBy] = useState<string>("-createdAt");
   const [jobs, setJobs] = useState<ApiJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState<ApiJob | null>(null);
@@ -884,7 +885,7 @@ function JobsPageContent() {
           filter: "status::eq::Ongoing",
           limit: -1,
           page: 1,
-          sort: "title",
+          sort: sortBy,
         });
         setJobs(res.data);
       } catch {
@@ -894,7 +895,7 @@ function JobsPageContent() {
       }
     }
     fetchJobs();
-  }, []);
+  }, [sortBy]);
 
   // Mark animation as done shortly after first render with data
   useEffect(() => {
@@ -1126,10 +1127,21 @@ function JobsPageContent() {
             </div>
           ) : (
             <>
-              <p className="mt-6 text-sm text-neutral-600">
-                {filtered.length} job{filtered.length !== 1 ? "s" : ""} found
-                {location && ` in ${location}`}
-              </p>
+              <div className="mt-6 flex items-center justify-between">
+                <p className="text-sm text-neutral-600">
+                  {filtered.length} job{filtered.length !== 1 ? "s" : ""} found
+                  {location && ` in ${location}`}
+                </p>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="rounded-lg border border-white/10 bg-white/4 px-3 py-1.5 text-xs text-neutral-400 outline-none transition focus:border-white/20"
+                >
+                  <option value="-createdAt">Newest</option>
+                  <option value="-salary.to">Highest Pay</option>
+                  <option value="title">A–Z</option>
+                </select>
+              </div>
 
               {/* Split layout */}
               <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_420px]">

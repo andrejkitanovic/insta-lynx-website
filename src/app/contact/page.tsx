@@ -81,7 +81,7 @@ export default function ContactPage() {
                 <ul className="mt-5 space-y-3 text-sm">
                   <li>
                     <a
-                      href="#"
+                      href="/contact"
                       className="inline-flex items-center gap-2 text-neutral-400 transition hover:text-white"
                     >
                       <CalendarBlank size={15} weight="bold" className="text-neutral-600" />
@@ -123,6 +123,23 @@ export default function ContactPage() {
               </div>
             </Reveal>
           </div>
+
+          {/* Map */}
+          <Reveal delay={0.25}>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/8">
+              <iframe
+                title="NovaLinx Headquarters"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3524.7!2d-82.4572!3d27.9506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c48e5fd0c30d%3A0x0!2s412+E+Madison+St%2C+Tampa%2C+FL+33602!5e0!3m2!1sen!2sus!4v1"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale invert opacity-80"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
