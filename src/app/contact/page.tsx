@@ -81,7 +81,9 @@ export default function ContactPage() {
                 <ul className="mt-5 space-y-3 text-sm">
                   <li>
                     <a
-                      href="/contact"
+                      href="https://calendly.com/novalinx/demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-neutral-400 transition hover:text-white"
                     >
                       <CalendarBlank size={15} weight="bold" className="text-neutral-600" />

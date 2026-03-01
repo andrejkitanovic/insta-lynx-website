@@ -35,9 +35,9 @@ export function Footer() {
             </p>
             <div className="mt-5 flex items-center gap-3">
               {[
-                { icon: XLogo, label: "X", href: "#" },
-                { icon: InstagramLogo, label: "Instagram", href: "#" },
-                { icon: FacebookLogo, label: "Facebook", href: "#" },
+                { icon: XLogo, label: "X", href: "https://x.com/novalinx" },
+                { icon: InstagramLogo, label: "Instagram", href: "https://instagram.com/novalinx" },
+                { icon: FacebookLogo, label: "Facebook", href: "https://facebook.com/novalinx" },
               ].map(({ icon: Icon, label, href }) => (
                 <motion.a
                   key={label}
@@ -73,6 +73,11 @@ export function Footer() {
               <li>
                 <Link href="/carrier" className="transition hover:text-white">
                   For Carriers
+                </Link>
+              </li>
+              <li>
+                <Link href="/companies" className="transition hover:text-white">
+                  Browse Companies
                 </Link>
               </li>
               <li>
