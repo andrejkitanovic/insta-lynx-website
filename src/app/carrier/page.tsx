@@ -52,7 +52,12 @@ export default function CarrierPage() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a href="#" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <a
+                href="https://calendly.com/novalinx/demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+              >
                 Book a Free Demo
               </a>
               <a href="#pricing" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
@@ -184,7 +189,12 @@ export default function CarrierPage() {
                 <p className="mt-3"><span className="text-3xl font-semibold">$99</span><span className="text-sm text-neutral-500">/month</span></p>
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For small carriers hiring occasionally</p>
-                <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
+                <a
+                  href="https://app.novalinx.io/signup?plan=starter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6"
+                >
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
@@ -209,7 +219,12 @@ export default function CarrierPage() {
                 <p className="mt-3"><span className="text-3xl font-semibold">$249</span><span className="text-sm text-neutral-500">/month</span></p>
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For growing fleets hiring consistently</p>
-                <a href="#" className="mt-6 flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                <a
+                  href="https://app.novalinx.io/signup?plan=growth"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                >
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-400">
@@ -231,7 +246,12 @@ export default function CarrierPage() {
                 <p className="mt-3"><span className="text-3xl font-semibold">$499</span><span className="text-sm text-neutral-500">/month</span></p>
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For medium fleets scaling hiring operations</p>
-                <a href="#" className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
+                <a
+                  href="https://app.novalinx.io/signup?plan=fleet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6"
+                >
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
@@ -291,7 +311,12 @@ export default function CarrierPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <a href="#" className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <a
+              href="https://calendly.com/novalinx/demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            >
               Book a Free Demo
             </a>
           </Reveal>

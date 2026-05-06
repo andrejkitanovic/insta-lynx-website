@@ -22,7 +22,7 @@ export function Footer() {
             >
               <Image
                 src="/logo.png"
-                alt=""
+                alt="NovaLinx logo"
                 width={24}
                 height={24}
                 className="h-6 w-6 shrink-0 object-contain"

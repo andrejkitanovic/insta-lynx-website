@@ -45,7 +45,12 @@ export default function InvestorsPage() {
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <a href="#" className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <a
+              href="https://calendly.com/novalinx/investors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            >
               Book a Meeting
             </a>
           </Reveal>
@@ -209,7 +214,12 @@ export default function InvestorsPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <a href="#" className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <a
+              href="https://calendly.com/novalinx/investors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            >
               Book a Meeting
             </a>
           </Reveal>

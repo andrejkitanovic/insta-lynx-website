@@ -1,8 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarBlank, User, BookOpen } from "@phosphor-icons/react/dist/ssr";
 import { Reveal, StaggerContainer, cardChild } from "@/components/animations";
 import { getAllPosts } from "@/lib/blog";
 import { BlogGrid } from "./blog-grid";
+
+export const metadata: Metadata = {
+  title: "Blog — Unbreaking Trucking",
+  description:
+    "Insights, news, and career advice for CDL drivers and trucking carriers. Industry trends, regulation updates, and tips from the NovaLinx team.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "NovaLinx Blog — Unbreaking Trucking",
+    description:
+      "Insights, news, and career advice for CDL drivers and trucking carriers.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NovaLinx Blog — Unbreaking Trucking",
+  },
+};
 
 const CATEGORIES = [
   "All",

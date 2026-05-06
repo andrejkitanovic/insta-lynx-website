@@ -36,9 +36,10 @@ export function Header() {
         >
           <Image
             src="/logo.png"
-            alt=""
+            alt="NovaLinx logo"
             width={28}
             height={28}
+            priority
             className="h-7 w-7 shrink-0 object-contain"
           />
           NovaLinx

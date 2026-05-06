@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarBlank, User } from "@phosphor-icons/react/dist/ssr";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Reveal } from "@/components/animations";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { blogPostingJsonLd, breadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,14 +21,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
+  const url = `/blog/${post.slug}`;
   return {
-    title: `${post.title} — NovaLinx Blog`,
+    title: post.title,
     description: post.excerpt,
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url,
       type: "article",
       authors: [post.author],
+      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
+      section: post.category,
+      tags: [post.category],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
     },
   };
 }
@@ -38,8 +50,24 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
+  const articleLd = blogPostingJsonLd(post);
+  const breadcrumbsLd = breadcrumbJsonLd([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsLd) }}
+      />
+
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/8">
         <div className="pointer-events-none absolute inset-0 -z-10">

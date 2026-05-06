@@ -117,13 +117,16 @@ export default function Home() {
           <Reveal delay={0.5}>
             <div className="mt-10 flex items-center justify-center gap-4">
               {[
-                { icon: XLogo, label: "X" },
-                { icon: InstagramLogo, label: "Instagram" },
-                { icon: FacebookLogo, label: "Facebook" },
-              ].map(({ icon: Icon, label }) => (
+                { icon: XLogo, label: "X", href: "https://x.com/novalinx" },
+                { icon: InstagramLogo, label: "Instagram", href: "https://instagram.com/novalinx" },
+                { icon: FacebookLogo, label: "Facebook", href: "https://facebook.com/novalinx" },
+              ].map(({ icon: Icon, label, href }) => (
                 <motion.a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`NovaLinx on ${label}`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/3 text-neutral-600 transition-colors duration-200 hover:border-white/20 hover:text-white"

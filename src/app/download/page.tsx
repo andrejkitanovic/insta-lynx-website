@@ -18,7 +18,7 @@ import {
   SectionHeader,
   cardChild,
 } from "@/components/animations";
-import { AppStoreBadges } from "@/components/app-store-badges";
+import { AppStoreBadges, APP_STORE_URL } from "@/components/app-store-badges";
 
 export default function DownloadPage() {
   return (
@@ -127,7 +127,12 @@ export default function DownloadPage() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a href="#" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+              >
                 Download the App
               </a>
               <a href="/jobs" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
