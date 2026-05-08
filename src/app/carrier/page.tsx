@@ -53,12 +53,10 @@ export default function CarrierPage() {
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="https://calendly.com/novalinx/demo"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#demo"
                 className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
-                Book a Free Demo
+                Watch Demo
               </a>
               <a href="#pricing" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6">
                 See Plans <CaretRight size={14} weight="bold" />
@@ -294,31 +292,57 @@ export default function CarrierPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden py-28">
+      {/* Demo Video */}
+      <section id="demo" className="relative overflow-hidden border-t border-white/8 py-24 sm:py-28">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-br from-white/4 via-white/2 to-transparent blur-3xl" />
+          <div className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-br from-white/4 via-white/2 to-transparent blur-3xl" />
         </div>
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto max-w-5xl px-6">
           <Reveal>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-              Ready to Fill Your Seats?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="mx-auto mt-4 max-w-xl text-base text-neutral-500">
-              Book a live demo and see how NovaLinx can transform your driver recruiting.
-            </p>
+            <div className="mb-12 text-center">
+              <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-neutral-600">
+                Demo
+              </p>
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+                See How It Works.
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base text-neutral-500">
+                Watch how drivers sign up, get matched by AI, apply, and get hired, and how carriers manage the full pipeline from one portal.
+              </p>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <a
-              href="https://calendly.com/novalinx/demo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
-            >
-              Book a Free Demo
-            </a>
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_50px_100px_rgba(0,0,0,0.6),0_0_80px_rgba(56,130,246,0.15)]">
+              <video
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/demo/poster.jpg"
+                className="aspect-video w-full"
+              >
+                <source src="/demo/novalinx-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="#pricing"
+                className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+              >
+                Get Started Free
+              </a>
+              <a
+                href="#pricing"
+                className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6"
+              >
+                See Plans <CaretRight size={14} weight="bold" />
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>
