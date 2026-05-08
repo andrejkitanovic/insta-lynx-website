@@ -79,7 +79,7 @@ export default function Home() {
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-500 sm:text-xl">
               Enter your ZIP code to see jobs tailored to your home time, route
-              type, and pay preferences. No recruiters you don&apos;t want —
+              type, and pay preferences. No recruiters you don&apos;t want,
               just lanes that fit&nbsp;your&nbsp;life.
             </p>
           </Reveal>
@@ -189,7 +189,7 @@ export default function Home() {
           <SectionHeader
             label="Benefits"
             title="Why Choose Us?"
-            description="Everything drivers and carriers need to find, match, and move — faster."
+            description="Everything drivers and carriers need to find, match, and move, faster."
           />
 
           <StaggerContainer className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -207,7 +207,7 @@ export default function Home() {
               {
                 icon: ShieldCheck,
                 title: "Verified Carriers Only",
-                desc: "Every carrier on the platform is vetted — no scams, no ghost postings.",
+                desc: "Every carrier on the platform is vetted: no scams, no ghost postings.",
               },
               {
                 icon: CursorClick,
@@ -368,7 +368,7 @@ export default function Home() {
                 {[
                   "Targeted exposure to relevant, qualified drivers only.",
                   "Manage applications from web or integrate with your ATS.",
-                  "Built for fleets of all sizes — small carrier to enterprise.",
+                  "Built for fleets of all sizes, from small carrier to enterprise.",
                   "Transparent pricing. No hidden fees.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -403,7 +403,7 @@ export default function Home() {
           <SectionHeader
             label="Process"
             title="Our Simple & Smart Process"
-            description="Get matched in three easy steps — whether you're a driver or a carrier."
+            description="Get matched in three easy steps, whether you're a driver or a carrier."
           />
           <StaggerContainer className="mt-14 grid gap-5 sm:grid-cols-3">
             {[
@@ -417,7 +417,7 @@ export default function Home() {
                 step: "02",
                 icon: Handshake,
                 title: "Get Matched",
-                desc: "Our system instantly connects you with the best-fit jobs or drivers based on your criteria — no manual searching.",
+                desc: "Our system instantly connects you with the best-fit jobs or drivers based on your criteria, no manual searching.",
               },
               {
                 step: "03",
@@ -493,7 +493,7 @@ export default function Home() {
               },
               {
                 quote:
-                  "Switched from another platform — night and day difference.",
+                  "Switched from another platform: night and day difference.",
                 name: "Elena R.",
                 role: "CDL-B Driver · West Coast",
               },
@@ -535,7 +535,7 @@ export default function Home() {
               {[
                 {
                   q: "Is NovaLinx free for drivers?",
-                  a: "Yes, NovaLinx is completely free for CDL drivers. Create a profile, browse jobs, and apply — no cost ever.",
+                  a: "Yes, NovaLinx is completely free for CDL drivers. Create a profile, browse jobs, and apply at no cost ever.",
                 },
                 {
                   q: "How does the matching work?",

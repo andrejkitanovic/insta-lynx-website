@@ -101,7 +101,7 @@ export default function InvestorsPage() {
                 <h3 className="text-lg font-medium">NovaLinx Connect</h3>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-500">
                   Our AI-powered assistant that automates the recruiting workflow.
-                  It screens, matches, and communicates with drivers on behalf of carriers — 24/7.
+                  It screens, matches, and communicates with drivers on behalf of carriers, 24/7.
                 </p>
               </div>
             </Reveal>
@@ -121,7 +121,7 @@ export default function InvestorsPage() {
               <div>
                 <p className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">For Drivers</p>
                 <ul className="space-y-3 text-sm text-neutral-400">
-                  {["Less searching, more driving", "Trusted carrier insights before applying", "Faster hiring process — days, not weeks"].map((item) => (
+                  {["Less searching, more driving", "Trusted carrier insights before applying", "Faster hiring process: days, not weeks"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <CaretRight size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
                       {item}
@@ -134,7 +134,7 @@ export default function InvestorsPage() {
               <div>
                 <p className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">For Carriers</p>
                 <ul className="space-y-3 text-sm text-neutral-400">
-                  {["No wasted time on unqualified leads", "3x faster time-to-hire", "Risk-free recruitment — pay for results"].map((item) => (
+                  {["No wasted time on unqualified leads", "3x faster time-to-hire", "Risk-free recruitment: pay for results"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <CaretRight size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
                       {item}

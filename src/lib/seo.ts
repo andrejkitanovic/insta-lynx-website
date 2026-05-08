@@ -65,7 +65,7 @@ export const websiteJsonLd = {
 export const mobileAppJsonLd = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
-  name: `${SITE_NAME} — CDL Trucking Jobs`,
+  name: `${SITE_NAME} | CDL Trucking Jobs`,
   operatingSystem: "iOS, Android",
   applicationCategory: "BusinessApplication",
   description:
@@ -118,7 +118,7 @@ export function blogPostingJsonLd(post: {
 
 /**
  * Google for Jobs structured data. Carriers with no logo, missing salary, etc.
- * still produce valid output — fields are conditionally included.
+ * still produce valid output; fields are conditionally included.
  */
 export function jobPostingJsonLd(job: ApiJob) {
   const city = job.city || job.locations?.[0]?.city;

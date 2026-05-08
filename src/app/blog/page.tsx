@@ -6,12 +6,12 @@ import { getAllPosts } from "@/lib/blog";
 import { BlogGrid } from "./blog-grid";
 
 export const metadata: Metadata = {
-  title: "Blog — Unbreaking Trucking",
+  title: "Blog | Unbreaking Trucking",
   description:
     "Insights, news, and career advice for CDL drivers and trucking carriers. Industry trends, regulation updates, and tips from the NovaLinx team.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "NovaLinx Blog — Unbreaking Trucking",
+    title: "NovaLinx Blog | Unbreaking Trucking",
     description:
       "Insights, news, and career advice for CDL drivers and trucking carriers.",
     url: "/blog",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NovaLinx Blog — Unbreaking Trucking",
+    title: "NovaLinx Blog | Unbreaking Trucking",
   },
 };
 

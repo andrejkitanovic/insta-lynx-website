@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -19,8 +18,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NovaLinx — Find Your Next CDL Trucking Job",
-    template: "%s — NovaLinx",
+    default: "NovaLinx | Find Your Next CDL Trucking Job",
+    template: "%s | NovaLinx",
   },
   description:
     "NovaLinx connects CDL drivers with carriers that match their home time, route type, and pay preferences. Browse verified trucking jobs and apply in minutes.",
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "NovaLinx — Find Your Next CDL Trucking Job",
+    title: "NovaLinx | Find Your Next CDL Trucking Job",
     description:
       "Browse trucking jobs matched to your home time, route type, and pay preferences. Built for CDL drivers and the carriers who hire them.",
     url: SITE_URL,
@@ -58,13 +57,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NovaLinx — CDL trucking jobs matched to your life",
+        alt: "NovaLinx, CDL trucking jobs matched to your life",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NovaLinx — Find Your Next CDL Trucking Job",
+    title: "NovaLinx | Find Your Next CDL Trucking Job",
     description:
       "Browse trucking jobs matched to your home time, route type, and pay preferences.",
     site: "@novalinx",
@@ -111,6 +110,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* JSON-LD inlined (not via next/script) so it's in the initial SSR
+            HTML, required for Google/Bing to discover the structured data. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -119,18 +130,6 @@ export default function RootLayout({
           {children}
           <Footer />
         </div>
-        <Script
-          id="ld-organization"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <Script
-          id="ld-website"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
       </body>
     </html>
   );

@@ -179,7 +179,7 @@ export const JOBS: Job[] = [
       "1 year P&D experience preferred",
       "Must be able to use pallet jack",
     ],
-    freightHandling: "Touch freight — average 12 stops/day",
+    freightHandling: "Touch freight, average 12 stops/day",
     additionalInfo: [
       "Day cab equipment",
       "Full benefits package",
@@ -302,7 +302,7 @@ export const JOBS: Job[] = [
       "6 months delivery experience",
       "Ability to lift 50 lbs",
     ],
-    freightHandling: "Touch freight — 15-20 stops/day",
+    freightHandling: "Touch freight, 15-20 stops/day",
     additionalInfo: [
       "Automatic transmission trucks",
       "Health and dental benefits",
@@ -345,7 +345,7 @@ export const JOBS: Job[] = [
       "Must be able to tarp and secure loads",
       "Clean MVR",
     ],
-    freightHandling: "Driver assist — tarping and securement required",
+    freightHandling: "Driver assist, tarping and securement required",
     additionalInfo: [
       "Tarp pay on every load",
       "Full benefits after 30 days",

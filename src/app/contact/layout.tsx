@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact NovaLinx — Drivers, Carriers & Support",
+  title: "Contact NovaLinx | Drivers, Carriers & Support",
   description:
     "Get in touch with NovaLinx. Driver support, carrier sales, and partnership inquiries. Available Monday–Friday, 9am–6pm EST.",
   alternates: { canonical: "/contact" },

@@ -73,22 +73,22 @@ export function InsightsClient({ data }: { data: InsightsResponse | null }) {
               {
                 icon: CurrencyDollar,
                 label: "Avg Weekly Pay",
-                value: s ? fmt(s.avgWeeklyPay) : "—",
+                value: s ? fmt(s.avgWeeklyPay) : "-",
               },
               {
                 icon: TrendUp,
                 label: "Median Pay",
-                value: s ? fmt(s.medianPay) : "—",
+                value: s ? fmt(s.medianPay) : "-",
               },
               {
                 icon: Medal,
                 label: "90th Percentile",
-                value: s ? fmt(s.p90Pay) : "—",
+                value: s ? fmt(s.p90Pay) : "-",
               },
               {
                 icon: Briefcase,
                 label: "Active Jobs",
-                value: s ? totalJobs.toLocaleString() : "—",
+                value: s ? totalJobs.toLocaleString() : "-",
               },
             ].map((card) => (
               <motion.div

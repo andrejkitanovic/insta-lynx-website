@@ -78,9 +78,9 @@ export default function CarrierPage() {
           <StaggerContainer className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Users, title: "Qualified Drivers", desc: "Every driver on our platform has a verified CDL and is actively job-hunting." },
-              { icon: Crosshair, title: "All-in on Trucking", desc: "We're not a general job board. Trucking is all we do — and we do it well." },
+              { icon: Crosshair, title: "All-in on Trucking", desc: "We're not a general job board. Trucking is all we do, and we do it well." },
               { icon: Clock, title: "Improved Time-to-hire", desc: "Our matching fills seats 3x faster than traditional recruiting." },
-              { icon: CurrencyDollar, title: "Transparent Pricing", desc: "Plans from $99/mo. No hidden fees — scale when you're ready." },
+              { icon: CurrencyDollar, title: "Transparent Pricing", desc: "Plans from $99/mo. No hidden fees, scale when you're ready." },
             ].map((item) => (
               <motion.div key={item.title} variants={cardChild} whileHover={{ y: -4, transition: { duration: 0.2 } }} className="group rounded-2xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-6 transition-colors duration-300 hover:border-white/15">
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-white/8 bg-white/4 text-neutral-400 transition-colors group-hover:text-white">
@@ -127,8 +127,8 @@ export default function CarrierPage() {
           <StaggerContainer className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: EnvelopeSimple, title: "Invite Drivers to Apply", desc: "Proactively reach out to drivers that match your job requirements." },
-              { icon: Robot, title: "CoPilot — Recruit Smarter", desc: "Our AI assistant helps you craft listings and identify the best candidates." },
-              { icon: FileText, title: "Complete Applications", desc: "Receive full driver applications — no more chasing missing information." },
+              { icon: Robot, title: "CoPilot: Recruit Smarter", desc: "Our AI assistant helps you craft listings and identify the best candidates." },
+              { icon: FileText, title: "Complete Applications", desc: "Receive full driver applications, no more chasing missing information." },
               { icon: Headset, title: "Dedicated Support", desc: "A real person to help you optimize listings and improve results." },
               { icon: UsersFour, title: "Match with Qualified Drivers", desc: "Our algorithm surfaces drivers whose preferences align with your lanes." },
               { icon: BellRinging, title: "Automated Notifications", desc: "Get instant alerts when a qualified driver applies to your posting." },
@@ -276,9 +276,9 @@ export default function CarrierPage() {
           <Reveal delay={0.1}>
             <div className="mt-12 divide-y divide-white/8">
               {[
-                { q: "How does payment work?", a: "Every plan starts with a free first month — no credit card charged until month two. After that, plans start at $99/month. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. Upgrade or downgrade anytime." },
+                { q: "How does payment work?", a: "Every plan starts with a free first month, with no credit card charged until month two. After that, plans start at $99/month. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. Upgrade or downgrade anytime." },
                 { q: "How do I get started?", a: "Sign up, start your free trial, add your company info, and post your first job in under 5 minutes." },
-                { q: "What about driver retention?", a: "Our matching focuses on fit — not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
+                { q: "What about driver retention?", a: "Our matching focuses on fit, not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
                 { q: "Can I integrate with my ATS?", a: "Yes. We support integrations with major ATS platforms. Contact our team for setup help." },
               ].map((item) => (
                 <details key={item.q} className="group py-5">

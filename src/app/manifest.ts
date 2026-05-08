@@ -3,7 +3,7 @@ import { SITE_NAME } from "@/lib/seo";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE_NAME} — CDL Trucking Jobs`,
+    name: `${SITE_NAME} | CDL Trucking Jobs`,
     short_name: SITE_NAME,
     description:
       "Find CDL trucking jobs matched to your home time, route type, and pay preferences.",

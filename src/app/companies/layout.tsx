@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Browse trucking carriers hiring CDL drivers on NovaLinx. View safety records, fleet size, operating states, and open positions for each company.",
   alternates: { canonical: "/companies" },
   openGraph: {
-    title: "Trucking Companies Hiring CDL Drivers — NovaLinx",
+    title: "Trucking Companies Hiring CDL Drivers | NovaLinx",
     description:
       "Browse carriers hiring CDL drivers. View safety records, fleet size, and open positions.",
     url: "/companies",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trucking Companies Hiring CDL Drivers — NovaLinx",
+    title: "Trucking Companies Hiring CDL Drivers | NovaLinx",
   },
 };
 

@@ -105,7 +105,7 @@ export function OperatingAreaMap({
             const abbr = FIPS_TO_ABBR[hoveredState];
             const hq = isHeadquarters(hoveredState);
             const op = isOperating(hoveredState);
-            return `${abbr || ""}${hq ? " — Headquarters" : op ? " — Operating" : " — Not Operating"}`;
+            return `${abbr || ""}${hq ? " · Headquarters" : op ? " · Operating" : " · Not Operating"}`;
           })()}
         </div>
       )}
