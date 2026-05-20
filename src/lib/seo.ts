@@ -8,8 +8,8 @@ export const SITE_URL = (
 
 export const SOCIAL = {
   x: "https://x.com/novalinx",
-  instagram: "https://instagram.com/novalinx",
-  facebook: "https://facebook.com/novalinx",
+  instagram: "https://www.instagram.com/novalinx.io",
+  facebook: "https://www.facebook.com/profile.php?id=61587948161861",
   linkedin: "https://www.linkedin.com/company/novalinx",
 };
 

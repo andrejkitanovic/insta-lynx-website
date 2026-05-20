@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     url: "/changelog",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "NovaLinx Changelog",
+    description: "Latest updates and improvements to the NovaLinx platform.",
+  },
 };
 
 export default function ChangelogLayout({ children }: { children: React.ReactNode }) {

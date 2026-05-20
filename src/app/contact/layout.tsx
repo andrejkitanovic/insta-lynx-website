@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     url: "/contact",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact NovaLinx",
+    description: "Driver support, carrier sales, and partnership inquiries.",
+  },
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

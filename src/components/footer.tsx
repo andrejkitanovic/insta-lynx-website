@@ -7,7 +7,9 @@ import {
   XLogo,
   InstagramLogo,
   FacebookLogo,
+  LinkedinLogo,
 } from "@phosphor-icons/react";
+import { SOCIAL } from "@/lib/seo";
 
 export function Footer() {
   return (
@@ -35,9 +37,10 @@ export function Footer() {
             </p>
             <div className="mt-5 flex items-center gap-3">
               {[
-                { icon: XLogo, label: "X", href: "https://x.com/novalinx" },
-                { icon: InstagramLogo, label: "Instagram", href: "https://instagram.com/novalinx" },
-                { icon: FacebookLogo, label: "Facebook", href: "https://facebook.com/novalinx" },
+                { icon: XLogo, label: "X", href: SOCIAL.x },
+                { icon: InstagramLogo, label: "Instagram", href: SOCIAL.instagram },
+                { icon: FacebookLogo, label: "Facebook", href: SOCIAL.facebook },
+                { icon: LinkedinLogo, label: "LinkedIn", href: SOCIAL.linkedin },
               ].map(({ icon: Icon, label, href }) => (
                 <motion.a
                   key={label}
