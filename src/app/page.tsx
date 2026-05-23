@@ -16,6 +16,7 @@ import {
   XLogo,
   InstagramLogo,
   FacebookLogo,
+  LinkedinLogo,
   ArrowDown,
   Plus,
   Star,
@@ -30,6 +31,7 @@ import {
   cardChild,
 } from "@/components/animations";
 import { AppStoreBadges } from "@/components/app-store-badges";
+import { SOCIAL } from "@/lib/seo";
 
 export default function Home() {
   const router = useRouter();
@@ -117,9 +119,10 @@ export default function Home() {
           <Reveal delay={0.5}>
             <div className="mt-10 flex items-center justify-center gap-4">
               {[
-                { icon: XLogo, label: "X", href: "https://x.com/novalinx" },
-                { icon: InstagramLogo, label: "Instagram", href: "https://instagram.com/novalinx" },
-                { icon: FacebookLogo, label: "Facebook", href: "https://facebook.com/novalinx" },
+                { icon: XLogo, label: "X", href: SOCIAL.x },
+                { icon: InstagramLogo, label: "Instagram", href: SOCIAL.instagram },
+                { icon: FacebookLogo, label: "Facebook", href: SOCIAL.facebook },
+                { icon: LinkedinLogo, label: "LinkedIn", href: SOCIAL.linkedin },
               ].map(({ icon: Icon, label, href }) => (
                 <motion.a
                   key={label}
