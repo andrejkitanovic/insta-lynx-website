@@ -3,7 +3,7 @@ import type { ApiJob } from "@/lib/api";
 
 export const SITE_NAME = "NovaLinx";
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://novalinx.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://novalinx.io"
 ).replace(/\/$/, "");
 
 export const SOCIAL = {
@@ -16,7 +16,7 @@ export const SOCIAL = {
 export const ORG = {
   name: SITE_NAME,
   legalName: "NovaLinx, Inc.",
-  email: "support@novalinx.com",
+  email: "support@novalinx.io",
   phone: "+1-813-644-3940",
   address: {
     street: "412 East Madison, Suite 1200",

@@ -58,7 +58,7 @@ export default function ContactPage() {
                 <ul className="mt-5 space-y-3 text-sm">
                   <li className="flex items-center gap-2.5 text-neutral-400">
                     <Envelope size={15} weight="bold" className="text-neutral-600" />
-                    drivers@novalinx.com
+                    drivers@novalinx.io
                   </li>
                   <li className="flex items-center gap-2.5 text-neutral-400">
                     <Phone size={15} weight="bold" className="text-neutral-600" />
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   </li>
                   <li className="flex items-center gap-2.5 text-neutral-400">
                     <Envelope size={15} weight="bold" className="text-neutral-600" />
-                    carriers@novalinx.com
+                    carriers@novalinx.io
                   </li>
                   <li className="flex items-center gap-2.5 text-neutral-400">
                     <Phone size={15} weight="bold" className="text-neutral-600" />

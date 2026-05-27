@@ -129,7 +129,7 @@ export function Footer() {
               Contact
             </p>
             <ul className="space-y-2.5 text-sm text-neutral-500">
-              <li>support@novalinx.com</li>
+              <li>support@novalinx.io</li>
               <li>(813) 644-3940</li>
               <li className="text-neutral-600">
                 412 East Madison, Suite 1200
