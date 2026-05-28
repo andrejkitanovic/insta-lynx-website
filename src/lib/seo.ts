@@ -3,7 +3,7 @@ import type { ApiJob } from "@/lib/api";
 
 export const SITE_NAME = "NovaLinx";
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://novalinx.io"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.novalinx.io"
 ).replace(/\/$/, "");
 
 export const SOCIAL = {
