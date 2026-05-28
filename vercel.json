@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "novalinx.io" }],
+      "destination": "https://www.novalinx.io/$1",
+      "permanent": true
+    }
+  ]
+}
