@@ -97,6 +97,25 @@ export default function PrivacyPolicyPage() {
               </div>
             </Reveal>
 
+            <Reveal delay={0.18}>
+              <div>
+                <h2 className="mb-4 text-xl font-medium text-white">
+                  SMS / text messaging
+                </h2>
+                <p>
+                  By providing your phone number when creating an account, you
+                  consent to receive SMS messages from NovaLinx, including
+                  one-time verification codes and account notifications such as
+                  application status updates and new-message alerts. Message
+                  frequency varies. Message and data rates may apply. You can
+                  opt out at any time by replying STOP, or reply HELP for help.
+                  No mobile information will be shared with third parties or
+                  affiliates for marketing or promotional purposes. SMS opt-in
+                  consent is never sold or transferred to any third party.
+                </p>
+              </div>
+            </Reveal>
+
             <Reveal delay={0.2}>
               <div>
                 <h2 className="mb-4 text-xl font-medium text-white">
