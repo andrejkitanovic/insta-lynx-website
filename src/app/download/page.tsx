@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoBackdrop } from "@/components/photo";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -135,7 +136,8 @@ export default function DownloadPage() {
       </section>
 
       {/* Get Matched CTA */}
-      <section className="relative overflow-hidden py-28">
+      <section className="relative isolate overflow-hidden py-28">
+        <PhotoBackdrop src="/images/trailer-sunset.jpg" strength="soft" />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-br from-white/4 via-white/2 to-transparent blur-3xl" />
         </div>

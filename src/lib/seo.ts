@@ -6,6 +6,13 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.novalinx.io"
 ).replace(/\/$/, "");
 
+/** Spread into every `openGraph`: Next replaces (not merges) parent openGraph, so without this subpages lose their image. */
+export const OG_DEFAULTS = {
+  siteName: SITE_NAME,
+  locale: "en_US",
+  images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "NovaLinx, CDL trucking jobs matched to your life" }],
+};
+
 export const SOCIAL = {
   x: "https://x.com/novalinx",
   instagram: "https://www.instagram.com/novalinx.io",
@@ -97,23 +104,56 @@ export function blogPostingJsonLd(post: {
   excerpt: string;
   author: string;
   date: string;
+  updated: string;
   category: string;
+  tags: string[];
+  wordCount: number;
 }) {
   const url = `${SITE_URL}/blog/${post.slug}`;
+  const published = new Date(post.date).toISOString();
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${url}#article`,
     headline: post.title,
     description: post.excerpt,
-    datePublished: new Date(post.date).toISOString(),
-    dateModified: new Date(post.date).toISOString(),
-    author: { "@type": "Organization", name: post.author || SITE_NAME },
+    datePublished: published,
+    dateModified: post.updated ? new Date(post.updated).toISOString() : published,
+    author: post.author.startsWith(SITE_NAME)
+      ? { "@type": "Organization", name: post.author, url: SITE_URL }
+      : { "@type": "Person", name: post.author },
     publisher: { "@id": `${SITE_URL}/#organization` },
+    isPartOf: { "@id": `${SITE_URL}/blog#blog` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
+    inLanguage: "en-US",
     articleSection: post.category,
-    image: `${SITE_URL}/og-image.png`,
+    keywords: post.tags.join(", "),
+    wordCount: post.wordCount,
+    image: {
+      "@type": "ImageObject",
+      url: `${url}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
   };
+}
+
+export function faqJsonLd(faq: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+}
+
+/** Renders one or more JSON-LD objects inline so they're in the SSR HTML. */
+export function jsonLdScript(data: object | object[]) {
+  return { __html: JSON.stringify(data).replace(/</g, "\\u003c") };
 }
 
 /**
@@ -172,7 +212,7 @@ export function jobPostingJsonLd(job: ApiJob) {
     industry: "Transportation and Trucking",
     occupationalCategory: "53-3032 Heavy and Tractor-Trailer Truck Drivers",
     directApply: true,
-    url: `${SITE_URL}/jobs?id=${job._id}`,
+    url: `${SITE_URL}/jobs/${job._id}`,
   };
 }
 

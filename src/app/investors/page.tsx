@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoBackdrop } from "@/components/photo";
 import { motion } from "framer-motion";
 import {
   TrendUp,
@@ -25,7 +26,8 @@ export default function InvestorsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/8">
+      <section className="relative isolate overflow-hidden border-b border-white/8">
+        <PhotoBackdrop src="/images/highway-aerial.jpg" position="center 60%" priority />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-[-100px] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-linear-to-b from-white/6 via-white/2 to-transparent blur-3xl" />
         </div>
@@ -58,7 +60,8 @@ export default function InvestorsPage() {
       </section>
 
       {/* A Broken System */}
-      <section className="relative overflow-hidden border-b border-white/8 py-24">
+      <section className="relative isolate overflow-hidden border-b border-white/8 py-24">
+        <PhotoBackdrop src="/images/highway-lanes.jpg" />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-[-200px] top-[-100px] h-[400px] w-[400px] rounded-full bg-white/2 blur-3xl" />
         </div>

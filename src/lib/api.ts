@@ -97,6 +97,7 @@ export interface Carrier {
   safety?: CarrierSafetyRecord;
   responsive_employer?: boolean;
   createdAt?: string;
+  updatedAt?: string;
 }
 
 // ─── Job Types ───
@@ -171,6 +172,7 @@ export interface ApiJob {
   orientation?: JobOrientation;
   endorsements_required?: string[];
   createdAt?: string;
+  updatedAt?: string;
 }
 
 // ─── Common Types ───

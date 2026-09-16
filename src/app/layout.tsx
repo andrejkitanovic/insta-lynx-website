@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { SITE_URL, SITE_NAME, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { SITE_URL, SITE_NAME, organizationJsonLd, websiteJsonLd, OG_DEFAULTS } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,21 +45,12 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    ...OG_DEFAULTS,
     type: "website",
-    siteName: SITE_NAME,
     title: "NovaLinx | Find Your Next CDL Trucking Job",
     description:
       "Browse trucking jobs matched to your home time, route type, and pay preferences. Built for CDL drivers and the carriers who hire them.",
     url: SITE_URL,
-    locale: "en_US",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "NovaLinx, CDL trucking jobs matched to your life",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -68,7 +59,6 @@ export const metadata: Metadata = {
       "Browse trucking jobs matched to your home time, route type, and pay preferences.",
     site: "@novalinx",
     creator: "@novalinx",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,

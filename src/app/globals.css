@@ -22,3 +22,27 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Blog article typography. ponytail: hand-rolled instead of @tailwindcss/typography, add the plugin if we need more elements */
+.article { color: #a3a3a3; font-size: 1.0625rem; line-height: 1.8; }
+.article > * + * { margin-top: 1.25em; }
+.article h2 { margin-top: 2.5em; font-size: 1.625rem; line-height: 1.3; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+.article h3 { margin-top: 2em; font-size: 1.25rem; line-height: 1.4; font-weight: 600; color: #fff; }
+.article h2 + *, .article h3 + * { margin-top: 0.75em; }
+.article a { color: #fff; text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.3); text-underline-offset: 3px; }
+.article a:hover { text-decoration-color: #fff; }
+.article h2 a, .article h3 a { text-decoration: none; }
+.article strong { color: #fff; font-weight: 600; }
+.article ul, .article ol { padding-left: 1.4em; }
+.article ul { list-style: disc; }
+.article ol { list-style: decimal; }
+.article li + li { margin-top: 0.4em; }
+.article li::marker { color: #525252; }
+.article blockquote { border-left: 2px solid rgb(255 255 255 / 0.2); padding-left: 1em; color: #d4d4d4; font-style: italic; }
+.article code { background: rgb(255 255 255 / 0.06); border-radius: 4px; padding: 0.1em 0.35em; font-size: 0.9em; }
+.article hr { border-color: rgb(255 255 255 / 0.08); margin: 2.5em 0; }
+.article .table-wrap { overflow-x: auto; border: 1px solid rgb(255 255 255 / 0.08); border-radius: 12px; }
+.article table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.5; }
+.article th { background: rgb(255 255 255 / 0.04); color: #fff; font-weight: 500; text-align: left; }
+.article th, .article td { padding: 0.7em 1em; border-bottom: 1px solid rgb(255 255 255 / 0.06); vertical-align: top; }
+.article tr:last-child td { border-bottom: 0; }

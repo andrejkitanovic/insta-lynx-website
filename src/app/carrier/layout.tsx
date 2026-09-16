@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_DEFAULTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "For Carriers: Hire CDL Drivers Faster",
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
     "Recruit qualified CDL drivers 3x faster. NovaLinx is the trucking-only job platform built for motor carriers. Plans from $99/mo with the first month free.",
   alternates: { canonical: "/carrier" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "For Carriers: Hire CDL Drivers Faster | NovaLinx",
     description:
       "The trucking-only job platform built for motor carriers. Plans from $99/mo, first month free.",

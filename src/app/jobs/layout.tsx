@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_DEFAULTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Browse CDL Trucking Jobs",
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
     "Search verified CDL trucking jobs by location, route type, pay, home time, and equipment. Find your next OTR, regional, or local trucking job.",
   alternates: { canonical: "/jobs" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "Browse CDL Trucking Jobs | NovaLinx",
     description:
       "Search verified CDL trucking jobs by location, route type, pay, home time, and equipment.",

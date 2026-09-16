@@ -7,7 +7,7 @@ import {
   type Carrier,
   type ApiJob,
 } from "@/lib/api";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, OG_DEFAULTS } from "@/lib/seo";
 import { CarrierDetailClient } from "./carrier-detail-client";
 
 interface Props {
@@ -56,6 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical },
     openGraph: {
+      ...OG_DEFAULTS,
       title,
       description,
       url: canonical,

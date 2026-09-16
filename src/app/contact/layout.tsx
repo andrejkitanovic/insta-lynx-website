@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_DEFAULTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact NovaLinx | Drivers, Carriers & Support",
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
     "Get in touch with NovaLinx. Driver support, carrier sales, and partnership inquiries. Available Monday–Friday, 9am–6pm EST.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "Contact NovaLinx",
     description: "Driver support, carrier sales, and partnership inquiries.",
     url: "/contact",

@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoBackdrop } from "@/components/photo";
 import { motion } from "framer-motion";
 import {
   Users,
@@ -26,12 +27,21 @@ import {
   SectionHeader,
   cardChild,
 } from "@/components/animations";
+import { faqJsonLd, jsonLdScript } from "@/lib/seo";
+
+const CARRIER_FAQ = [
+  { q: "How does payment work?", a: "Every plan starts with a free first month, with no credit card charged until month two. After that, plans start at $99/month. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. Upgrade or downgrade anytime." },
+  { q: "How do I get started?", a: "Sign up, start your free trial, add your company info, and post your first job in under 5 minutes." },
+  { q: "What about driver retention?", a: "Our matching focuses on fit, not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
+  { q: "Can I integrate with my ATS?", a: "Yes. We support integrations with major ATS platforms. Contact our team for setup help." },
+];
 
 export default function CarrierPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/8">
+      <section className="relative isolate overflow-hidden border-b border-white/8">
+        <PhotoBackdrop src="/images/fleet-aerial.jpg" priority />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-[-100px] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-linear-to-b from-white/6 via-white/2 to-transparent blur-3xl" />
         </div>
@@ -188,7 +198,7 @@ export default function CarrierPage() {
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For small carriers hiring occasionally</p>
                 <a
-                  href="https://app.novalinx.io/signup?plan=starter"
+                  href="https://app.novalinx.io/sign-up?plan=starter"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6"
@@ -218,7 +228,7 @@ export default function CarrierPage() {
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For growing fleets hiring consistently</p>
                 <a
-                  href="https://app.novalinx.io/signup?plan=growth"
+                  href="https://app.novalinx.io/sign-up?plan=growth"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-200 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
@@ -245,7 +255,7 @@ export default function CarrierPage() {
                 <p className="mt-1 text-sm text-emerald-400/80">First month free</p>
                 <p className="mt-0.5 text-sm text-neutral-500">For medium fleets scaling hiring operations</p>
                 <a
-                  href="https://app.novalinx.io/signup?plan=fleet"
+                  href="https://app.novalinx.io/sign-up?plan=fleet"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 flex items-center justify-center rounded-full border border-white/12 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/25 hover:bg-white/6"
@@ -268,17 +278,13 @@ export default function CarrierPage() {
       </section>
 
       {/* FAQ */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqJsonLd(CARRIER_FAQ))} />
       <section className="border-b border-white/8 py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeader label="FAQ's" title="Frequently Asked Questions" />
           <Reveal delay={0.1}>
             <div className="mt-12 divide-y divide-white/8">
-              {[
-                { q: "How does payment work?", a: "Every plan starts with a free first month, with no credit card charged until month two. After that, plans start at $99/month. Pick Starter for occasional hiring, Growth for consistent recruiting, or Fleet for scaling operations. Upgrade or downgrade anytime." },
-                { q: "How do I get started?", a: "Sign up, start your free trial, add your company info, and post your first job in under 5 minutes." },
-                { q: "What about driver retention?", a: "Our matching focuses on fit, not just filling seats. When drivers end up in lanes that match their lifestyle, they stay longer." },
-                { q: "Can I integrate with my ATS?", a: "Yes. We support integrations with major ATS platforms. Contact our team for setup help." },
-              ].map((item) => (
+              {CARRIER_FAQ.map((item) => (
                 <details key={item.q} className="group py-5">
                   <summary className="flex cursor-pointer items-center justify-between text-[15px] font-medium text-neutral-300 transition-colors duration-200 group-open:text-white">
                     {item.q}

@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoBackdrop } from "@/components/photo";
 import { Reveal, StaggerContainer, cardChild } from "@/components/animations";
 import { motion } from "framer-motion";
 import {
@@ -35,7 +36,8 @@ export function InsightsClient({ data }: { data: InsightsResponse | null }) {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/8">
+      <section className="relative isolate overflow-hidden border-b border-white/8">
+        <PhotoBackdrop src="/images/highway-top.jpg" priority />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-[-100px] h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-linear-to-b from-white/6 via-white/2 to-transparent blur-3xl" />
         </div>

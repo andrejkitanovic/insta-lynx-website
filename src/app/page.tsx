@@ -30,8 +30,32 @@ import {
   SectionHeader,
   cardChild,
 } from "@/components/animations";
+import { PhotoBackdrop, PhotoFrame } from "@/components/photo";
 import { AppStoreBadges } from "@/components/app-store-badges";
-import { SOCIAL } from "@/lib/seo";
+import { SOCIAL, faqJsonLd, jsonLdScript } from "@/lib/seo";
+
+const HOME_FAQ = [
+  {
+    q: "Is NovaLinx free for drivers?",
+    a: "Yes, NovaLinx is completely free for CDL drivers. Create a profile, browse jobs, and apply at no cost ever.",
+  },
+  {
+    q: "How does the matching work?",
+    a: "When you create a profile, you tell us your preferred home time, route type, equipment, and pay range. We automatically surface jobs that fit.",
+  },
+  {
+    q: "What types of CDL jobs are listed?",
+    a: "OTR, regional, local, dedicated, team, and owner-operator positions across all 48 states.",
+  },
+  {
+    q: "How do carriers post jobs?",
+    a: "Sign up, add your company details, and post a job in under 5 minutes. Jobs go live immediately and reach qualified drivers.",
+  },
+  {
+    q: "Is my information secure?",
+    a: "Absolutely. We use enterprise-grade security and never share your data without your explicit permission.",
+  },
+];
 
 export default function Home() {
   const router = useRouter();
@@ -49,8 +73,9 @@ export default function Home() {
       {/* ─── Hero ─── */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden border-b border-white/8"
+        className="relative isolate overflow-hidden border-b border-white/8"
       >
+        <PhotoBackdrop src="/images/home-hero.jpg" position="center 60%" priority />
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <motion.div
             style={{ y: glowY, scale: glowScale }}
@@ -288,7 +313,8 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal delay={0.1}>
-            <div className="rounded-3xl border border-white/8 bg-linear-to-b from-white/4 to-white/1 p-6 shadow-[0_0_60px_rgba(255,255,255,0.03)]">
+            <PhotoFrame src="/images/drivers.jpg" alt="Semi truck on the highway at golden hour, seen from a truck's side mirror" aspect="aspect-[4/3]">
+            <div className="rounded-3xl border border-white/10 bg-[#0a0a0a]/80 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
               <p className="mb-4 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
                 <Star size={12} weight="fill" className="text-neutral-500" />
                 Featured Lanes
@@ -319,6 +345,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            </PhotoFrame>
           </Reveal>
         </div>
       </section>
@@ -330,7 +357,8 @@ export default function Home() {
         </div>
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:items-center">
           <Reveal className="order-2 lg:order-1">
-            <div className="rounded-3xl border border-white/8 bg-linear-to-b from-white/4 to-white/1 p-6 shadow-[0_0_60px_rgba(255,255,255,0.03)]">
+            <PhotoFrame src="/images/carriers.jpg" alt="Fleet worker in a hard hat inspecting a semi trailer" position="center 30%">
+            <div className="rounded-3xl border border-white/10 bg-[#0a0a0a]/80 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { stat: "10k+", label: "Drivers on platform" },
@@ -359,6 +387,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            </PhotoFrame>
           </Reveal>
           <div className="order-1 lg:order-2">
             <SectionHeader
@@ -526,6 +555,7 @@ export default function Home() {
       </section>
 
       {/* ─── FAQ ─── */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqJsonLd(HOME_FAQ))} />
       <section className="border-b border-white/8 py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeader
@@ -535,28 +565,7 @@ export default function Home() {
           />
           <Reveal delay={0.15}>
             <div className="mt-12 divide-y divide-white/8">
-              {[
-                {
-                  q: "Is NovaLinx free for drivers?",
-                  a: "Yes, NovaLinx is completely free for CDL drivers. Create a profile, browse jobs, and apply at no cost ever.",
-                },
-                {
-                  q: "How does the matching work?",
-                  a: "When you create a profile, you tell us your preferred home time, route type, equipment, and pay range. We automatically surface jobs that fit.",
-                },
-                {
-                  q: "What types of CDL jobs are listed?",
-                  a: "OTR, regional, local, dedicated, team, and owner-operator positions across all 48 states.",
-                },
-                {
-                  q: "How do carriers post jobs?",
-                  a: "Sign up, add your company details, and post a job in under 5 minutes. Jobs go live immediately and reach qualified drivers.",
-                },
-                {
-                  q: "Is my information secure?",
-                  a: "Absolutely. We use enterprise-grade security and never share your data without your explicit permission.",
-                },
-              ].map((item) => (
+              {HOME_FAQ.map((item) => (
                 <details key={item.q} className="group py-5">
                   <summary className="flex cursor-pointer items-center justify-between text-[15px] font-medium text-neutral-300 transition-colors duration-200 group-open:text-white">
                     {item.q}
@@ -577,7 +586,8 @@ export default function Home() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="relative overflow-hidden py-32">
+      <section className="relative isolate overflow-hidden py-32">
+        <PhotoBackdrop src="/images/open-road.jpg" position="center 70%" strength="soft" />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-br from-white/4 via-white/2 to-transparent blur-3xl" />
         </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { getJob, formatSalary, type ApiJob } from "@/lib/api";
-import { breadcrumbJsonLd, jobPostingJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, jobPostingJsonLd, OG_DEFAULTS } from "@/lib/seo";
 import { JobDetailClient } from "./job-detail-client";
 
 interface Props {
@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical },
     openGraph: {
+      ...OG_DEFAULTS,
       title,
       description,
       url: canonical,
