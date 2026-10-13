@@ -206,7 +206,7 @@ export default function CarrierPage() {
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
-                  {["Unlimited job postings", "15 driver unlocks / month", "Access to CDL-verified drivers", "In-app messaging", "Basic driver filters", "Standard email support"].map((f) => (
+                  {["10 active job posts", "10 driver connections / month", "Access to CDL-verified drivers", "In-app messaging", "Basic driver filters", "Standard email support"].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
                       {f}
@@ -236,7 +236,7 @@ export default function CarrierPage() {
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-400">
-                  {["Everything in Starter", "Unlimited driver unlocks", "Advanced recruiting filters", "Hiring activity dashboard", "Priority placement in search", "Faster support"].map((f) => (
+                  {["Everything in Starter", "20 active job posts", "30 driver connections / month", "Advanced recruiting filters", "Hiring activity dashboard", "Priority placement in search", "Faster support"].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-400" />
                       {f}
@@ -263,7 +263,7 @@ export default function CarrierPage() {
                   Start Free Trial
                 </a>
                 <ul className="mt-6 space-y-3 text-sm text-neutral-500">
-                  {["Everything in Growth", "Multi-user team accounts", "Advanced analytics (time-to-hire, trends)", "Premium visibility placement", "Dedicated support"].map((f) => (
+                  {["Everything in Growth", "Unlimited job posts", "Unlimited driver connections", "Multi-user team accounts", "Advanced analytics (time-to-hire, trends)", "Premium visibility placement", "Dedicated support"].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check size={14} weight="bold" className="mt-0.5 shrink-0 text-neutral-600" />
                       {f}
