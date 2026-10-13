@@ -16,6 +16,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: "/changelog", priority: 0.4, changeFrequency: "monthly" },
   { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms-and-conditions", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/sms", priority: 0.3, changeFrequency: "yearly" },
   { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/ccpa", priority: 0.3, changeFrequency: "yearly" },
 ];

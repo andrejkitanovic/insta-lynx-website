@@ -117,6 +117,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/sms" className="transition hover:text-white">
+                  SMS Terms
+                </Link>
+              </li>
+              <li>
                 <Link href="/cookie-policy" className="transition hover:text-white">
                   Cookie Policy
                 </Link>
